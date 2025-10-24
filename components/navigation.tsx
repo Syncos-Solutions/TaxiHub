@@ -9,9 +9,9 @@ export default function Navigation() {
 
   const navLinks = [
     { href: "/", label: "Home" },
-    { href: "/about", label: "About Us" },
+    { href: "#about", label: "About Us" },
     { href: "/booking", label: "Booking" },
-    { href: "/testimonials", label: "Testimonials" },
+    // { href: "/#testimonials", label: "Testimonials" },
     { href: "/contact", label: "Contact Us" },
   ]
 
