@@ -8,6 +8,7 @@ import { StaggerTestimonials } from "@/components/ui/ui/stagger-testimonials"
  import { motion } from "framer-motion"
 import SmoothScrollHero from "@/components/ui/ui/smooth-scroll-hero"
 // import Chatbot from "../components/chatbot"
+import HowItWorksSection from "./howitworks"
 
 export default function ServicesEnhanced() {
   const missionStatement =
@@ -79,7 +80,7 @@ export default function ServicesEnhanced() {
 
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-6xl font-black tracking-wider mb-12 text-gray-900">OUR MISSION</h2>
+            <h2 className="text-4xl md:text-6xl font-black tracking-wider mb-12 text-gray-900">ABOUT US</h2>
             <TextGradientScroll
               text={missionStatement}
               className="text-2xl md:text-3xl lg:text-4xl font-medium leading-relaxed text-gray-800 "
@@ -107,6 +108,9 @@ export default function ServicesEnhanced() {
 
           <Timeline entries={timelineEntries} />
         </div>
+      </section>
+      <section>
+        <HowItWorksSection/>
       </section>
 
       {/* Testimonials Section */}
@@ -137,7 +141,7 @@ export default function ServicesEnhanced() {
       </section> 
 
       {/* Smooth Scroll Hero with CTA Overlay */}
-      <section id="join" className="relative">
+      {/* <section id="join" className="relative">
         <SmoothScrollHero
           scrollHeight={2500}
           desktopImage="/hero1.png"
@@ -145,7 +149,7 @@ export default function ServicesEnhanced() {
           initialClipPercentage={30}
           finalClipPercentage={70}
         />
-      </section> 
+      </section>  */}
       {/* <Chatbot /> */}
     </div>
   )
