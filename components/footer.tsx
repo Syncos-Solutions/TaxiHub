@@ -53,22 +53,22 @@ export default function Footer() {
             <h4 className="font-bold mb-4 text-accent">Support</h4>
             <ul className="space-y-2 text-primary-foreground/70">
               <li>
-                <a href="#" className="hover:text-accent transition-colors duration-300">
+                <a href="/helpcenter" className="hover:text-accent transition-colors duration-300">
                   Help Center
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <a href="#" className="hover:text-accent transition-colors duration-300">
                   Safety
                 </a>
-              </li>
+              </li> */}
               <li>
-                <a href="#" className="hover:text-accent transition-colors duration-300">
+                <a href="/terms" className="hover:text-accent transition-colors duration-300">
                   Terms & Conditions
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-accent transition-colors duration-300">
+                <a href="/privacy" className="hover:text-accent transition-colors duration-300">
                   Privacy Policy
                 </a>
               </li>
@@ -107,6 +107,7 @@ export default function Footer() {
 
         <div className="border-t border-primary-foreground/20 pt-8 text-center text-primary-foreground/70">
           <p>&copy; 2025 TaxiHub Sri Lanka. All rights reserved.</p>
+          <p>Design and Develop <Link href={"https://syncossolutions.com"}>Syncos Solutions</Link></p>
         </div>
       </div>
     </footer>
