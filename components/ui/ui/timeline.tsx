@@ -74,7 +74,8 @@ function TimelineItem({ entry, index, scrollProgress }: TimelineItemProps) {
             })}
           >
             <div className="sticky top-20">
-              <div className="relative overflow-hidden rounded-2xl aspect-[3/4] bg-gray-100">
+<div className="relative overflow-hidden rounded-2xl h-[352px] md:h-[384px] lg:h-[416px] bg-gray-100">
+                {/* Changed from aspect-[3/4] to fixed heights for shorter images */}
                 <img
                   src={entry.image || "/placeholder.svg"}
                   alt={entry.alt}

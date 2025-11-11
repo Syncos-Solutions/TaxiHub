@@ -80,10 +80,10 @@ export default function ServicesEnhanced() {
 
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-6xl font-black tracking-wider mb-12 text-gray-900">ABOUT US</h2>
+            <h2 className="text-6xl md:text-4xl font-black tracking-wider mb-12 text-gray-900">ABOUT US</h2>
             <TextGradientScroll
               text={missionStatement}
-              className="text-2xl md:text-3xl lg:text-4xl font-medium leading-relaxed text-gray-800 "
+              className="text-xl md:text-xl lg:text-2xl font-medium leading-relaxed text-gray-800 "
               type="word"
               textOpacity="soft"
             />
