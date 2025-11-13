@@ -10,7 +10,7 @@ interface BookingMapProps {
 export default function BookingMap({ selectedPickup, selectedDestination }: BookingMapProps) {
   const [mapUrl, setMapUrl] = useState("")
 
-  const GOOGLE_MAPS_API_KEY = "AIzaSyCSDUDNOWCK5dVbjVCdKMRNj3nDTuqn5Uw"
+    const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
 
   // Function to geocode location names to coordinates
   const getCoordinates = (location: string) => {
