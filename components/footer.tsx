@@ -12,9 +12,9 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center text-primary font-bold">
-                T
+                M
               </div>
-              <span className="font-bold text-lg">TaxiHub</span>
+              <span className="font-bold text-lg">MihithTaxi</span>
             </div>
             <p className="text-primary-foreground/70">
               Your trusted taxi service for reliable and affordable rides across Sri Lanka.
@@ -26,7 +26,7 @@ export default function Footer() {
             <h4 className="font-bold mb-4 text-accent">Quick Links</h4>
             <ul className="space-y-2 text-primary-foreground/70">
               <li>
-                <Link href="/about" className="hover:text-accent transition-colors duration-300">
+                <Link href="/#about" className="hover:text-accent transition-colors duration-300">
                   About Us
                 </Link>
               </li>
@@ -36,7 +36,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/testimonials" className="hover:text-accent transition-colors duration-300">
+                <Link href="/#testimonials" className="hover:text-accent transition-colors duration-300">
                   Testimonials
                 </Link>
               </li>
@@ -81,11 +81,11 @@ export default function Footer() {
             <div className="space-y-3 mb-4">
               <div className="flex items-center gap-2 text-primary-foreground/70 hover:text-accent transition-colors">
                 <Phone size={18} />
-                <span>+94 11 234 5678</span>
+                <span>+94 77 728 8286</span>
               </div>
               <div className="flex items-center gap-2 text-primary-foreground/70 hover:text-accent transition-colors">
                 <Mail size={18} />
-                <span>info@taxihub.lk</span>
+                <span>support@mihithlanka.com</span>
               </div>
             </div>
             <div className="flex gap-4">
@@ -106,7 +106,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-primary-foreground/20 pt-8 text-center text-primary-foreground/70">
-          <p>&copy; 2025 TaxiHub Sri Lanka. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} MihithTaxi Sri Lanka. All rights reserved.</p>
           <p>Design and Develop <Link href={"https://syncossolutions.com"}>Syncos Solutions</Link></p>
         </div>
       </div>

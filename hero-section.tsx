@@ -1,181 +1,158 @@
 "use client"
 
 import { LiquidButton } from "@/components/ui/ui/liquid-glass-button"
-import { Menu, ChevronLeft, ChevronRight, X } from "lucide-react"
-import { useState } from "react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
+import { useState, useEffect } from "react"
 
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0)
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  const slides = [
+  // Desktop/Tablet images
+  const desktopSlides = [
     {
-      image: "/hero1.png",
+      image: "/1.png",
       alt: "Group of runners in motion",
     },
     {
-      image: "/hero2.png",
+      image: "/2.png",
       alt: "Female runner with motion blur",
-    },
-    {
-      image: "/hero3.png",
-      alt: "Male runner leading group",
     },
   ]
 
-//   const navItems = [
-//     { name: "Home", href: "#hero" },
-//     { name: "Mission", href: "#mission" },
-//     { name: "Community", href: "#community" },
-//     { name: "Testimonials", href: "#testimonials" },
-//     { name: "Join Us", href: "#join" },
-//   ]
+  // Mobile images
+  const mobileSlides = [
+    {
+      image: "/1-mobile.png",
+      alt: "Group of runners in motion",
+    },
+    {
+      image: "/2-mobile.png",
+      alt: "Female runner with motion blur",
+    },
+  ]
+
+  // Auto-slide every 2 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % desktopSlides.length)
+    }, 4000)
+
+    return () => clearInterval(timer)
+  }, [desktopSlides.length])
 
   // Navigation handlers
-  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length)
-  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % desktopSlides.length)
+  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + desktopSlides.length) % desktopSlides.length)
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href)
     if (element) {
       element.scrollIntoView({ behavior: "smooth" })
     }
-    setIsMenuOpen(false)
   }
 
   return (
-    <div id="hero" className="relative h-screen w-full overflow-hidden bg-black">
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000 ease-in-out"
-        style={{
-          backgroundImage: `url('${slides[currentSlide].image}')`,
-        }}
-      >
-        {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/40" />
-      </div>
-
-      {/* Navigation */}
-      {/* <nav className="relative z-20 flex items-center justify-between p-6 md:p-8">
+    <div id="hero" className="relative w-full overflow-hidden bg-white">
+      {/* Container - Full width on mobile/tablet, margins on desktop */}
+      <div className="relative w-full px-2 py-20 sm:px-3 sm:py-22 md:px-4 md:py-24 lg:px-12 lg:py-32 xl:px-16 xl:py-36">
         
-        <div className="text-white font-bold text-xl tracking-wider">WADADA</div> */}
-
-        {/* Desktop Navigation */}
-        {/* <div className="hidden md:flex items-center space-x-8">
-          {navItems.map((item) => (
+        {/* Image Container with Navigation Buttons */}
+        <div className="relative w-full mx-auto max-w-7xl">
+          <div className="relative flex items-center gap-0 lg:gap-6">
+            
+            {/* Previous Button - Only visible on large screens */}
             <button
-              key={item.name}
-              onClick={() => scrollToSection(item.href)}
-              className="relative text-white hover:text-gray-300 transition-colors duration-300 font-medium tracking-wide pb-1 group"
+              onClick={prevSlide}
+              className="hidden lg:flex flex-shrink-0 text-gray-800 hover:text-[#ff9d00] transition-all duration-200 p-3 hover:scale-110 transform bg-white rounded-full shadow-lg hover:shadow-xl z-20"
+              aria-label="Previous slide"
             >
-              {item.name}
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 ease-out group-hover:w-full"></span>
+              <ChevronLeft className="w-8 h-8" />
             </button>
-          ))}
-        </div>
 
-       
-        <button
-          className="md:hidden text-white hover:text-gray-300 transition-colors"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          <span className="sr-only">Toggle menu</span>
-        </button>
-      </nav> */}
+            {/* Image Slider Container */}
+            <div className="relative flex-1 w-full rounded-lg md:rounded-xl lg:rounded-2xl overflow-hidden shadow-lg lg:shadow-2xl">
+              {/* Responsive height using Tailwind classes */}
+              <div className="relative w-full h-[80vh] sm:h-[65vh] md:h-[80vh] lg:aspect-video">
+                
+                {/* Mobile Images - Visible only on mobile */}
+                <div className="block md:hidden absolute inset-0">
+                  {mobileSlides.map((slide, index) => (
+                    <div
+                      key={`mobile-${index}`}
+                      className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                        currentSlide === index ? "opacity-100" : "opacity-0"
+                      }`}
+                    >
+                      <img
+                        src={slide.image}
+                        alt={slide.alt}
+                        className="absolute top-0 left-0 w-full h-full object-cover object-center"
+                      />
+                    </div>
+                  ))}
+                </div>
 
-      {/* Mobile Navigation Menu */}
-      {/* {isMenuOpen && (
-        <div className="absolute top-0 left-0 w-full h-full bg-black/90 z-30 md:hidden">
-          <div className="flex flex-col items-center justify-center h-full space-y-8">
-            {navItems.map((item) => (
-              <button
-                key={item.name}
-                onClick={() => scrollToSection(item.href)}
-                className="text-white text-2xl font-bold tracking-wider hover:text-gray-300 transition-colors duration-300"
-              >
-                {item.name}
-              </button>
-            ))}
-          </div>
-        </div>
-      )} */}
+                {/* Desktop/Tablet Images - Visible on tablet and above */}
+                <div className="hidden md:block absolute inset-0">
+                  {desktopSlides.map((slide, index) => (
+                    <div
+                      key={`desktop-${index}`}
+                      className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                        currentSlide === index ? "opacity-100" : "opacity-0"
+                      }`}
+                    >
+                      <img
+                        src={slide.image}
+                        alt={slide.alt}
+                        className="absolute top-0 left-0 w-full h-full object-cover object-center"
+                      />
+                    </div>
+                  ))}
+                </div>
 
-      {/* Hero Content */}
-      <div className="relative z-10 flex h-full items-center justify-center px-6">
-        <div className="text-center text-white max-w-4xl">
-          {/* Main Title */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-wider mb-4 leading-none">
-           Where Every Ride 
-            <br />
-            Becomes a Story
-          </h1>
+                {/* Hero Content Inside Image (if needed) */}
+                <div className="absolute inset-0 flex items-center justify-center px-4 sm:px-6 md:px-8 z-10">
+                  <div className="text-center text-white max-w-4xl w-full">
+                    {/* Uncomment if you want the button */}
+                    {/* <LiquidButton
+                      size="xxl"
+                      className="font-semibold text-accent text-xs sm:text-sm md:text-base lg:text-lg tracking-wide px-4 sm:px-6 md:px-8"
+                      onClick={() => scrollToSection("#fleet")}
+                    >
+                      Explore Our Fleet
+                    </LiquidButton> */}
+                  </div>
+                </div>
+              </div>
+            </div>
 
-          {/* Subtitle */}
-          <p className="text-xl md:text-1xl  font-light tracking-wide mb-8 text-gray-200">TaxiHub brings you a premium taxi experience across Sri Lanka — fast, flexible, and built around your comfort</p>
-
-          {/* CTA Button - Now using LiquidButton */}
-          <LiquidButton
-            size="xxl"
-            className="font-semibold text-accent text-lg tracking-wide"
-            onClick={() => scrollToSection("#fleet")}
-          >
-            Explore Our Fleet
-          </LiquidButton>
-        </div>
-      </div>
-
-      {/* Slider Navigation */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
-        <div className="flex items-center space-x-4">
-          {/* Previous Arrow */}
-          <button
-            onClick={prevSlide}
-            className="text-white hover:text-gray-300 transition-colors p-2"
-            aria-label="Previous slide"
-          >
-            <ChevronLeft size={24} />
-          </button>
-
-          {/* Slide Indicators */}
-          <div className="flex space-x-2">
-            {slides.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentSlide(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  currentSlide === index ? "bg-white" : "bg-white/40 hover:bg-white/60"
-                }`}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div>
-
-          {/* Next Arrow */}
-          <button
-            onClick={nextSlide}
-            className="text-white hover:text-gray-300 transition-colors p-2"
-            aria-label="Next slide"
-          >
-            <ChevronRight size={24} />
-          </button>
-        </div>
-      </div>
-
-      {/* Side Navigation Indicators */}
-      <div className="absolute right-8 top-1/2 transform -translate-y-1/2 z-20 hidden md:block">
-        <div className="flex flex-col space-y-3">
-          {slides.map((_, index) => (
+            {/* Next Button - Only visible on large screens */}
             <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`w-1 h-8 transition-all duration-300 ${
-                currentSlide === index ? "bg-white" : "bg-white/40 hover:bg-white/60"
-              }`}
-              aria-label={`Slide ${index + 1}`}
-            />
-          ))}
+              onClick={nextSlide}
+              className="hidden lg:flex flex-shrink-0 text-gray-800 hover:text-[#ff9d00] transition-all duration-200 p-3 hover:scale-110 transform bg-white rounded-full shadow-lg hover:shadow-xl z-20"
+              aria-label="Next slide"
+            >
+              <ChevronRight className="w-8 h-8" />
+            </button>
+          </div>
+
+          {/* Slide Indicators - Visible on all devices */}
+          <div className="absolute -bottom-6 sm:-bottom-8 md:-bottom-10 lg:-bottom-12 left-1/2 transform -translate-x-1/2 z-20">
+            <div className="flex items-center space-x-2 sm:space-x-2.5 md:space-x-3 bg-white/90 backdrop-blur-sm rounded-full px-3 sm:px-3.5 md:px-4 py-2 shadow-md">
+              {desktopSlides.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  className={`h-2 sm:h-2.5 md:h-3 rounded-full transition-all duration-300 ${
+                    currentSlide === index 
+                      ? "bg-[#ff9d00] w-6 sm:w-7 md:w-8" 
+                      : "bg-gray-400 w-2 sm:w-2.5 md:w-3 hover:bg-gray-600"
+                  }`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

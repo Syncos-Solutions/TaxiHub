@@ -10,6 +10,7 @@ interface TimelineEntry {
   alt: string
   title: string
   description: string
+  features?: string[]
   layout: "left" | "right"
 }
 
@@ -61,11 +62,7 @@ function TimelineItem({ entry, index, scrollProgress }: TimelineItemProps) {
       <div className="absolute left-1/2 top-1/2 w-4 h-4 bg-gray-900 rounded-full transform -translate-x-1/2 -translate-y-1/2 z-10 hidden md:block" />
 
       <div className="container mx-auto px-6">
-        <div
-          className={cn("grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center", {
-            "md:text-right": isLeft,
-          })}
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
           {/* Image */}
           <div
             className={cn("relative", {
@@ -74,8 +71,7 @@ function TimelineItem({ entry, index, scrollProgress }: TimelineItemProps) {
             })}
           >
             <div className="sticky top-20">
-<div className="relative overflow-hidden rounded-2xl h-[352px] md:h-[384px] lg:h-[416px] bg-gray-100">
-                {/* Changed from aspect-[3/4] to fixed heights for shorter images */}
+              <div className="relative overflow-hidden rounded-2xl h-[352px] md:h-[384px] lg:h-[416px] bg-gray-100">
                 <img
                   src={entry.image || "/placeholder.svg"}
                   alt={entry.alt}
@@ -104,7 +100,44 @@ function TimelineItem({ entry, index, scrollProgress }: TimelineItemProps) {
                 <h3 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-wide text-gray-900">
                   {entry.title}
                 </h3>
-                <p className="text-lg md:text-xl leading-relaxed text-gray-700 max-w-lg">{entry.description}</p>
+                
+                <div className="max-w-lg">
+                  <p className="text-lg md:text-xl leading-relaxed text-gray-700 mb-6">
+                    {entry.description}
+                  </p>
+
+                  {/* Bullet Points - Now properly aligned for both layouts */}
+                  {entry.features && entry.features.length > 0 && (
+                    <ul className="space-y-3">
+                      {entry.features.map((feature, idx) => (
+                        <motion.li
+                          key={idx}
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.4, delay: 0.3 + idx * 0.1 }}
+                          viewport={{ once: true }}
+                          className="flex items-start gap-3"
+                        >
+                          {/* Checkmark Icon */}
+                          <svg
+                            className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          <span className="text-gray-700 text-base md:text-lg">
+                            {feature}
+                          </span>
+                        </motion.li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
               </motion.div>
             </div>
           </div>

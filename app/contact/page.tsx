@@ -1,21 +1,3 @@
-// import Navigation from "@/components/navigation"
-// import ContactHero from "@/components/contact-hero"
-// import ContactForm from "@/components/contact-form"
-// import Footer from "@/components/footer"
-
-// export default function Contact() {
-//   return (
-//     <main className="min-h-screen bg-background">
-//       <Navigation />
-//       <ContactHero />
-//       <ContactForm />
-//       <Footer />
-//     </main>
-//   )
-// }
-
-
-// app/contact/page.tsx
 "use client"
 
 import { motion, useInView } from "framer-motion"
@@ -59,7 +41,7 @@ export default function ContactPage() {
       <Navigation />
 
       {/* Hero Section */}
-      <div className="relative bg-black text-white overflow-hidden">
+      <div className="relative bg-black text-white overflow-hidden mt-[60px]">
         {/* Animated Background Pattern */}
         <div className="absolute inset-0 opacity-5">
           <div
@@ -158,32 +140,6 @@ export default function ContactPage() {
             className="space-y-8"
           >
             <div>
-              {/* <motion.div
-                initial={{ scale: 0, rotate: -180 }}
-                whileInView={{ scale: 1, rotate: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                  type: "spring",
-                  stiffness: 200,
-                  damping: 15,
-                }}
-                className="inline-flex items-center justify-center bg-black text-white rounded-full px-6 py-3 mb-6 shadow-lg relative overflow-hidden group"
-              > */}
-                {/* <motion.div
-                  animate={{
-                    x: ["-100%", "100%"],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    repeatDelay: 1,
-                    ease: "easeInOut",
-                  }}
-                  className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                />
-                <Sparkles className="w-5 h-5 mr-2 relative z-10" />
-                <span className="font-bold tracking-wide relative z-10">CONTACT INFO</span>
-              </motion.div> */}
 
               <h2 className="text-3xl md:text-4xl font-black text-black mb-4 tracking-wide">
                 Let's Start a Conversation
@@ -198,15 +154,15 @@ export default function ContactPage() {
               <ContactInfoCard
                 icon={<Phone className="w-6 h-6" />}
                 title="Call Us"
-                detail="+94 12 345 6789"
-                link="tel:+94123456789"
+                detail="+94 77 728 8286"
+                link="tel:+94777288286"
                 delay={0.1}
               />
               <ContactInfoCard
                 icon={<Mail className="w-6 h-6" />}
                 title="Email Us"
-                detail="info@taxihub.lk"
-                link="mailto:info@taxihub.lk"
+                detail="support@mihithlanka.com"
+                link="mailto:support@mihithlanka.com"
                 delay={0.2}
               />
               <ContactInfoCard
@@ -268,7 +224,7 @@ export default function ContactPage() {
                       onChange={handleChange}
                       required
                       className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:border-black focus:outline-none transition-all duration-300 bg-white text-black placeholder-gray-400"
-                      placeholder="John Doe"
+                      placeholder="Enter your name"
                     />
                   </div>
                 </div>
@@ -289,7 +245,7 @@ export default function ContactPage() {
                       onChange={handleChange}
                       required
                       className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:border-black focus:outline-none transition-all duration-300 bg-white text-black placeholder-gray-400"
-                      placeholder="john@example.com"
+                      placeholder="@example.com"
                     />
                   </div>
                 </div>
@@ -421,10 +377,10 @@ export default function ContactPage() {
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <motion.a
-                  href="tel:+94123456789"
+                  href="tel:+94 77 728 8286"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center px-8 py-4 bg-[hsl(var(--chart-3))] text-black font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="inline-flex items-center px-8 py-4 bg-white text-black font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
                 >
                   <Phone className="w-5 h-5 mr-2" />
                   Call Now

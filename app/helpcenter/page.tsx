@@ -224,22 +224,22 @@ export default function HelpCenter() {
               <ContactCard
                 icon={<Phone className="w-6 h-6" />}
                 title="Call Us"
-                detail="+1 (234) 567-890"
-                link="tel:+1234567890"
+                detail="+94 77 728 8286"
+                link="tel:+94777288286"
                 delay={0.1}
               />
               <ContactCard
                 icon={<Mail className="w-6 h-6" />}
                 title="Email Us"
-                detail="support@taxihub.com"
-                link="mailto:support@taxihub.com"
+                detail="support@mihithlanka.com"
+                link="mailto:support@mihithlanka.com"
                 delay={0.2}
               />
               <ContactCard
                 icon={<MessageCircle className="w-6 h-6" />}
                 title="Live Chat"
                 detail="Start a conversation"
-                link="#"
+                link="https://wa.me/+94777288286"
                 delay={0.3}
               />
             </div>

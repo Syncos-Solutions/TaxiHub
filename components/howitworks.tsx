@@ -243,7 +243,7 @@ export default function HowItWorksSection() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => (window.location.href = "/booking")}
-                    className="group relative overflow-hidden bg-gradient-to-r from-[hsl(var(--chart-3))] to-[hsl(var(--destructive-foreground))] text-white px-10 py-5 rounded-full font-bold text-lg shadow-2xl"
+                    className="group relative overflow-hidden border-2 border-white/30 text-white px-10 py-5 rounded-full font-bold text-lg backdrop-blur-sm hover:border-white/60 transition-colors"
                   >
                     <motion.div
                       className="absolute inset-0 bg-white"
@@ -256,6 +256,7 @@ export default function HowItWorksSection() {
                       <Phone className="w-5 h-5" />
                       Book Your Ride Now
                     </span>
+                    
                   </motion.button>
 
                   {/* Secondary CTA */}
@@ -268,7 +269,7 @@ export default function HowItWorksSection() {
                     className="group relative overflow-hidden border-2 border-white/30 text-white px-10 py-5 rounded-full font-bold text-lg backdrop-blur-sm hover:border-white/60 transition-colors"
                   >
                     <span className="flex items-center gap-2">
-                      Explore Tours
+                      Plan Your Tours
                       <motion.div
                         animate={{ x: [0, 5, 0] }}
                         transition={{ duration: 1.5, repeat: Infinity }}
