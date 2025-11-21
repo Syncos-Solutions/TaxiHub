@@ -108,7 +108,7 @@ export default function PrivacyPolicy() {
           <div className="relative">
             <div className="absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-black via-gray-400 to-transparent" />
             <p className="text-gray-700 leading-relaxed text-lg pl-8">
-              At <span className="font-semibold text-black">Taxihub</span>, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your data when you use our taxi booking services.
+              At <span className="font-semibold text-black">MihithTaxi</span>, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your data when you use our taxi booking services.
             </p>
           </div>
         </motion.section>
