@@ -162,7 +162,7 @@ export default function ContactPage() {
                 icon={<Mail className="w-6 h-6" />}
                 title="Email Us"
                 detail="support@mihithlanka.com"
-                link="mailto:support@mihithlanka.com"
+                link="mailto:support@mihithlankatours.com"
                 delay={0.2}
               />
               <ContactInfoCard

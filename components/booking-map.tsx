@@ -81,7 +81,7 @@ export default function BookingMap({ selectedPickup, selectedDestination }: Book
   }, [selectedPickup, selectedDestination, GOOGLE_MAPS_API_KEY])
 
   return (
-    <div className="w-full h-150 sm:h-100 md:h-[500px] lg:h-[930px] rounded-xl overflow-hidden border-2 border-primary/10 shadow-xl">
+    <div className="w-full h-150 sm:h-100 md:h-[500px] lg:h-[1080px] rounded-xl overflow-hidden border-2 border-primary/10 shadow-xl">
       {mapUrl ? (
         <iframe
           width="100%"
