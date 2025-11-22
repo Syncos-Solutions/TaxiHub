@@ -106,58 +106,6 @@ export default function HelpCenter() {
 
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-        
-        {/* Quick Help Categories */}
-        {/* <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-20"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-black text-center mb-12">
-            Popular Topics
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <HelpCard
-              icon={<Car className="w-6 h-6" />}
-              title="Booking a Ride"
-              description="Learn how to book, modify, or cancel your taxi rides easily."
-              delay={0.1}
-            />
-            <HelpCard
-              icon={<CreditCard className="w-6 h-6" />}
-              title="Payments & Pricing"
-              description="Understand our pricing structure and payment methods."
-              delay={0.2}
-            />
-            <HelpCard
-              icon={<User className="w-6 h-6" />}
-              title="Account Settings"
-              description="Manage your profile, preferences, and account details."
-              delay={0.3}
-            />
-            <HelpCard
-              icon={<Shield className="w-6 h-6" />}
-              title="Safety & Security"
-              description="Your safety is our priority. Learn about our safety features."
-              delay={0.4}
-            />
-            <HelpCard
-              icon={<MapPin className="w-6 h-6" />}
-              title="Service Areas"
-              description="Check where our taxi services are available."
-              delay={0.5}
-            />
-            <HelpCard
-              icon={<MessageCircle className="w-6 h-6" />}
-              title="Support & Feedback"
-              description="Get in touch with our support team or share feedback."
-              delay={0.6}
-            />
-          </div>
-        </motion.section> */}
 
         {/* FAQ Section */}
         <motion.section
@@ -232,7 +180,7 @@ export default function HelpCenter() {
                 icon={<Mail className="w-6 h-6" />}
                 title="Email Us"
                 detail="support@mihithlanka.com"
-                link="mailto:support@mihithlanka.com"
+                link="mailto:support@mihithlankatours.com"
                 delay={0.2}
               />
               <ContactCard

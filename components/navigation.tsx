@@ -116,14 +116,14 @@ export default function Navigation() {
           {/* Right Side Navigation */}
           <li>
             <Link
-              href="/booking"
+              href="/#fleet"
               className={`font-medium transition-colors duration-300 ${
-                isActive("/booking")
+                isActive("/#fleet")
                   ? "text-[#ff9d00]"
                   : "text-gray-600 hover:text-gray-900"
               }`}
             >
-              Booking
+              Our Vehicles
             </Link>
           </li>
           <li>
@@ -142,7 +142,7 @@ export default function Navigation() {
           {/* Book Now Button */}
           <li>
             <Link
-              href="/booking"
+              href="/#Booking"
               className="bg-[#ff9d00] text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-[#ff9d00]/90 hover:shadow-lg transition-all duration-300"
             >
               Book Now

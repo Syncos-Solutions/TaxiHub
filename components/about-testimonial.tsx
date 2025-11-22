@@ -9,7 +9,7 @@ import HowItWorksSection from "./howitworks"
 
 export default function ServicesEnhanced() {
   const missionStatement =
-    "At MihithTaxi, we are dedicated to redefining taxi travel across Sri Lanka. Our mission is simple: to provide safe, reliable, and premium rides for everyone, from tourists exploring the island to locals commuting daily. Every vehicle in our network is carefully maintained, and our drivers are verified, ensuring a clean, professional, and seamless experience every time. With TaxiHub, booking a ride is effortless, travel is comfortable, and your journey is always our top priority."
+    "At MihithTaxi, we are dedicated to redefining taxi travel across Sri Lanka. Our mission is simple: to provide safe, reliable, and premium rides for everyone, from tourists exploring the island to locals commuting daily. Every vehicle in our network is carefully maintained, and our drivers are verified, ensuring a clean, professional, and seamless experience every time. With MihithTaxi, booking a ride is effortless, travel is comfortable, and your journey is always our top priority."
 
   const timelineEntries = [
     {
@@ -90,7 +90,7 @@ export default function ServicesEnhanced() {
                 EXPLORE OUR VEHICLES
               </h2>
               <p className="text-lg md:text-xl lg:text-2xl text-gray-600 max-w-3xl mx-auto">
-                TaxiHub offers premium taxi services across Sri Lanka — reliable drivers, clean vehicles, and transparent pricing for every trip
+                MihithTaxi offers premium taxi services across Sri Lanka. Reliable drivers, clean vehicles, and transparent pricing for every trip.
               </p>
             </div>
           </div>

@@ -85,21 +85,15 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2 text-primary-foreground/70 hover:text-accent transition-colors">
                 <Mail size={18} />
-                <span>support@mihithlanka.com</span>
+                <span>support@mihithlankatours.com</span>
               </div>
             </div>
             <div className="flex gap-4">
-              <a href="#" className="text-primary-foreground/70 hover:text-accent transition-colors duration-300">
+              <a href="https://www.facebook.com/share/1DK6GWLDcM/?mibextid=wwXIfr" className="text-primary-foreground/70 hover:text-accent transition-colors duration-300">
                 <Facebook size={20} />
               </a>
-              <a href="#" className="text-primary-foreground/70 hover:text-accent transition-colors duration-300">
-                <Twitter size={20} />
-              </a>
-              <a href="#" className="text-primary-foreground/70 hover:text-accent transition-colors duration-300">
+              <a href="https://www.instagram.com/mihith_lanka_tours?igsh=MW9hdjVmbDNrZXZzMQ%3D%3D&utm_source=q" className="text-primary-foreground/70 hover:text-accent transition-colors duration-300">
                 <Instagram size={20} />
-              </a>
-              <a href="#" className="text-primary-foreground/70 hover:text-accent transition-colors duration-300">
-                <Linkedin size={20} />
               </a>
             </div>
           </div>
