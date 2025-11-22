@@ -41,7 +41,7 @@ export default function ContactPage() {
       if (response.ok && data.success) {
         setSubmitStatus({
           type: 'success',
-          message: '✅ Thank you! We\'ve received your message and will get back to you within 2 hours.',
+          message: '✅ Thank you! We\'ve received your message and our team will get back to you soon.',
         })
         // Reset form
         setFormData({ name: "", email: "", phone: "", message: "" })
