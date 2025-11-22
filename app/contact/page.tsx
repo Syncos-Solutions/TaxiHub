@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, useInView } from "framer-motion"
-import { Mail, Phone, MapPin, Send, Clock, MessageSquare, User, Sparkles } from "lucide-react"
+import { Mail, Phone, MapPin, Send, Clock, MessageSquare, User, Sparkles, CheckCircle2, AlertCircle } from "lucide-react"
 import { useRef, useState } from "react"
 import Footer from "@/components/footer"
 import Navigation from "@/components/navigation"
@@ -14,19 +14,57 @@ export default function ContactPage() {
     message: "",
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error' | null
+    message: string
+  }>({ type: null, message: '' })
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-    
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-    
-    console.log("Form submitted:", formData)
-    setIsSubmitting(false)
-    
-    // Reset form
-    setFormData({ name: "", email: "", phone: "", message: "" })
+    setSubmitStatus({ type: null, message: '' })
+
+    try {
+      console.log('📤 Submitting contact form:', formData)
+
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+      console.log('📥 Response:', data)
+
+      if (response.ok && data.success) {
+        setSubmitStatus({
+          type: 'success',
+          message: '✅ Thank you! We\'ve received your message and will get back to you within 2 hours.',
+        })
+        // Reset form
+        setFormData({ name: "", email: "", phone: "", message: "" })
+        
+        // Auto-hide success message after 10 seconds
+        setTimeout(() => {
+          setSubmitStatus({ type: null, message: '' })
+        }, 10000)
+      } else {
+        setSubmitStatus({
+          type: 'error',
+          message: data.error || '❌ Something went wrong. Please try again or call us directly.',
+        })
+      }
+    } catch (error) {
+      console.error('❌ Error submitting form:', error)
+      setSubmitStatus({
+        type: 'error',
+        message: '❌ Failed to send message. Please try again or contact us at +94 77 659 9542',
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -140,7 +178,6 @@ export default function ContactPage() {
             className="space-y-8"
           >
             <div>
-
               <h2 className="text-3xl md:text-4xl font-black text-black mb-4 tracking-wide">
                 Let's Start a Conversation
               </h2>
@@ -154,15 +191,15 @@ export default function ContactPage() {
               <ContactInfoCard
                 icon={<Phone className="w-6 h-6" />}
                 title="Call Us"
-                detail="+94 77 728 8286"
-                link="tel:+94777288286"
+                detail="+94 77 659 9542"
+                link="tel:+94776599542"
                 delay={0.1}
               />
               <ContactInfoCard
                 icon={<Mail className="w-6 h-6" />}
                 title="Email Us"
                 detail="support@mihithlanka.com"
-                link="mailto:support@mihithlankatours.com"
+                link="mailto:support@mihithlanka.com"
                 delay={0.2}
               />
               <ContactInfoCard
@@ -207,11 +244,57 @@ export default function ContactPage() {
               {/* Decorative corner */}
               <div className="absolute top-0 right-0 w-32 h-32 bg-black opacity-0 hover:opacity-5 rounded-bl-full transition-opacity duration-500" />
 
+              {/* Success/Error Message */}
+              {submitStatus.type && (
+                <motion.div
+                  initial={{ opacity: 0, y: -20, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -20, scale: 0.95 }}
+                  className={`mb-6 p-5 rounded-2xl border-2 ${
+                    submitStatus.type === 'success'
+                      ? 'bg-green-50 border-green-500'
+                      : 'bg-red-50 border-red-500'
+                  }`}
+                >
+                  <div className="flex items-start gap-3">
+                    {submitStatus.type === 'success' ? (
+                      <motion.div
+                        initial={{ scale: 0, rotate: -180 }}
+                        animate={{ scale: 1, rotate: 0 }}
+                        transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                      >
+                        <CheckCircle2 className="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" />
+                      </motion.div>
+                    ) : (
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                      >
+                        <AlertCircle className="w-6 h-6 text-red-600 flex-shrink-0 mt-0.5" />
+                      </motion.div>
+                    )}
+                    <div className="flex-1">
+                      <p className={`text-sm font-bold ${
+                        submitStatus.type === 'success' ? 'text-green-800' : 'text-red-800'
+                      }`}>
+                        {submitStatus.message}
+                      </p>
+                      {submitStatus.type === 'success' && (
+                        <p className="text-xs text-green-700 mt-2">
+                          Check your email for a confirmation message. We'll be in touch soon! 📧
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
               <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
                 {/* Name Input */}
                 <div>
                   <label htmlFor="name" className="block text-sm font-bold text-black mb-2 tracking-wide">
-                    Your Name
+                    Your Name *
                   </label>
                   <div className="relative group">
                     <User className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-black transition-colors" />
@@ -223,8 +306,9 @@ export default function ContactPage() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:border-black focus:outline-none transition-all duration-300 bg-white text-black placeholder-gray-400"
-                      placeholder="Enter your name"
+                      disabled={isSubmitting}
+                      className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:border-black focus:outline-none transition-all duration-300 bg-white text-black placeholder-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
+                      placeholder="John Doe"
                     />
                   </div>
                 </div>
@@ -232,7 +316,7 @@ export default function ContactPage() {
                 {/* Email Input */}
                 <div>
                   <label htmlFor="email" className="block text-sm font-bold text-black mb-2 tracking-wide">
-                    Email Address
+                    Email Address *
                   </label>
                   <div className="relative group">
                     <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-black transition-colors" />
@@ -244,8 +328,9 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:border-black focus:outline-none transition-all duration-300 bg-white text-black placeholder-gray-400"
-                      placeholder="@example.com"
+                      disabled={isSubmitting}
+                      className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:border-black focus:outline-none transition-all duration-300 bg-white text-black placeholder-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
+                      placeholder="john@example.com"
                     />
                   </div>
                 </div>
@@ -253,7 +338,7 @@ export default function ContactPage() {
                 {/* Phone Input */}
                 <div>
                   <label htmlFor="phone" className="block text-sm font-bold text-black mb-2 tracking-wide">
-                    Phone Number
+                    Phone Number *
                   </label>
                   <div className="relative group">
                     <Phone className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-black transition-colors" />
@@ -265,8 +350,9 @@ export default function ContactPage() {
                       value={formData.phone}
                       onChange={handleChange}
                       required
-                      className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:border-black focus:outline-none transition-all duration-300 bg-white text-black placeholder-gray-400"
-                      placeholder="+94 12 345 6789"
+                      disabled={isSubmitting}
+                      className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:border-black focus:outline-none transition-all duration-300 bg-white text-black placeholder-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
+                      placeholder="+94 77 123 4567"
                     />
                   </div>
                 </div>
@@ -274,7 +360,7 @@ export default function ContactPage() {
                 {/* Message Textarea */}
                 <div>
                   <label htmlFor="message" className="block text-sm font-bold text-black mb-2 tracking-wide">
-                    Your Message
+                    Your Message *
                   </label>
                   <motion.textarea
                     whileFocus={{ scale: 1.01 }}
@@ -283,8 +369,9 @@ export default function ContactPage() {
                     value={formData.message}
                     onChange={handleChange}
                     required
+                    disabled={isSubmitting}
                     rows={5}
-                    className="w-full px-4 py-4 border-2 border-gray-200 rounded-xl focus:border-black focus:outline-none transition-all duration-300 bg-white text-black placeholder-gray-400 resize-none"
+                    className="w-full px-4 py-4 border-2 border-gray-200 rounded-xl focus:border-black focus:outline-none transition-all duration-300 bg-white text-black placeholder-gray-400 resize-none disabled:opacity-50 disabled:cursor-not-allowed"
                     placeholder="Tell us how we can help you..."
                   />
                 </div>
@@ -293,8 +380,8 @@ export default function ContactPage() {
                 <motion.button
                   type="submit"
                   disabled={isSubmitting}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                  whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
                   className="w-full relative overflow-hidden bg-black text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed group"
                 >
                   {/* Shimmer Effect */}
@@ -318,7 +405,7 @@ export default function ContactPage() {
                           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                           className="w-5 h-5 border-2 border-white border-t-transparent rounded-full mr-2"
                         />
-                        Sending...
+                        Sending Message...
                       </>
                     ) : (
                       <>
@@ -328,6 +415,11 @@ export default function ContactPage() {
                     )}
                   </span>
                 </motion.button>
+
+                {/* Privacy Note */}
+                <p className="text-xs text-gray-500 text-center mt-4">
+                  🔒 Your information is secure and will never be shared with third parties.
+                </p>
               </form>
             </div>
           </motion.div>
@@ -364,7 +456,7 @@ export default function ContactPage() {
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[hsl(var(--destructive-foreground))] rounded-full blur-3xl"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[hsl(var(--chart-3))] rounded-full blur-3xl"
             />
 
             <div className="relative z-10 text-center">
@@ -377,7 +469,7 @@ export default function ContactPage() {
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <motion.a
-                  href="tel:+94 77 728 8286"
+                  href="tel:+94776599542"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="inline-flex items-center px-8 py-4 bg-white text-black font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
@@ -387,7 +479,7 @@ export default function ContactPage() {
                 </motion.a>
 
                 <motion.a
-                  href="/"
+                  href="/booking"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="inline-flex items-center px-8 py-4 bg-white text-black font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"

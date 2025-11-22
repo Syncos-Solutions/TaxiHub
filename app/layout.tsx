@@ -11,9 +11,8 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: "Sri Lanka Taxi Service - Book Your Ride",
+  title: "MihithTaxi - Reliable Taxi Services in Sri Lanka",
   description: "Professional taxi services in Sri Lanka. Book your ride easily with our modern app.",
-  generator: "v0.app",
 }
 
 export default function RootLayout({
