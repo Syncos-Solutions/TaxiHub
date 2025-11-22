@@ -228,7 +228,7 @@ export default function ContactPage() {
             >
               <div className="absolute top-0 right-0 w-32 h-32 bg-black opacity-[0.02] rounded-full -mr-16 -mt-16" />
               <p className="text-sm text-gray-700 relative z-10">
-                <strong className="text-black">Quick Response Guaranteed:</strong> We typically respond within 2 hours during business hours.
+                <strong className="text-black">Quick Response Guaranteed:</strong> Our team will get back to you soon.
               </p>
             </motion.div>
           </motion.div>
@@ -308,7 +308,7 @@ export default function ContactPage() {
                       required
                       disabled={isSubmitting}
                       className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:border-black focus:outline-none transition-all duration-300 bg-white text-black placeholder-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
-                      placeholder="John Doe"
+                      placeholder="Enter Your Name"
                     />
                   </div>
                 </div>
@@ -330,7 +330,7 @@ export default function ContactPage() {
                       required
                       disabled={isSubmitting}
                       className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:border-black focus:outline-none transition-all duration-300 bg-white text-black placeholder-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
-                      placeholder="john@example.com"
+                      placeholder="Enter Your Email"
                     />
                   </div>
                 </div>
@@ -338,7 +338,7 @@ export default function ContactPage() {
                 {/* Phone Input */}
                 <div>
                   <label htmlFor="phone" className="block text-sm font-bold text-black mb-2 tracking-wide">
-                    Phone Number *
+                    WhatsApp Number *
                   </label>
                   <div className="relative group">
                     <Phone className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-black transition-colors" />
@@ -352,7 +352,7 @@ export default function ContactPage() {
                       required
                       disabled={isSubmitting}
                       className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:border-black focus:outline-none transition-all duration-300 bg-white text-black placeholder-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
-                      placeholder="+94 77 123 4567"
+                      placeholder="(+94) 77 123 4567"
                     />
                   </div>
                 </div>
