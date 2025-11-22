@@ -122,12 +122,12 @@ export default function HelpCenter() {
           <div className="space-y-4 max-w-4xl mx-auto">
             <FAQItem
               question="How do I book a taxi?"
-              answer="You can book a taxi through our mobile app or website. Simply enter your pickup location, destination, select your vehicle type, and confirm your booking. A driver will be assigned to you shortly."
+              answer="You can book a taxi through our website. Simply enter your pickup location, destination, and confirm your booking. A driver will be assigned to you shortly."
               delay={0.1}
             />
             <FAQItem
               question="What payment methods do you accept?"
-              answer="We accept cash, credit/debit cards, and digital wallet payments. You can add your preferred payment method in your account settings for a seamless checkout experience."
+              answer="We accept cash, credit/debit cards, payments. You can add your preferred payment method in your account settings for a seamless checkout experience."
               delay={0.2}
             />
             <FAQItem
@@ -172,14 +172,14 @@ export default function HelpCenter() {
               <ContactCard
                 icon={<Phone className="w-6 h-6" />}
                 title="Call Us"
-                detail="+94 77 728 8286"
-                link="tel:+94777288286"
+                detail="+94 77 659 9542"
+                link="tel:+94776599542"
                 delay={0.1}
               />
               <ContactCard
                 icon={<Mail className="w-6 h-6" />}
                 title="Email Us"
-                detail="support@mihithlanka.com"
+                detail="support@mihithlankatours.com"
                 link="mailto:support@mihithlankatours.com"
                 delay={0.2}
               />
@@ -187,7 +187,7 @@ export default function HelpCenter() {
                 icon={<MessageCircle className="w-6 h-6" />}
                 title="Live Chat"
                 detail="Start a conversation"
-                link="https://wa.me/+94777288286"
+                link="https://wa.me/+94776599542"
                 delay={0.3}
               />
             </div>

@@ -14,13 +14,13 @@ export default function HowItWorksSection() {
       number: "01",
       icon: MapPin,
       title: "Book Your Taxi",
-      description: "Visit our site and enter your pickup location and destination. Choose your preferred vehicle type.",
+      description: "Visit our site and enter your pickup location and destination.",
     },
     {
       number: "02",
       icon: DollarSign,
       title: "Get Instant Quote",
-      description: "Receive transparent pricing instantly. No hidden fees, no surprises—just honest, upfront costs.",
+      description: "Receive transparent pricing instantly. No hidden fees, no surprises just honest, upfront costs.",
     },
     {
       number: "03",
@@ -32,7 +32,7 @@ export default function HowItWorksSection() {
       number: "04",
       icon: Car,
       title: "Enjoy Your Ride",
-      description: "Sit back and relax. Your professional driver will ensure a safe and comfortable journey.",
+      description: "Sit back and relax. our professional drivers will ensure a safe and comfortable journey.",
     },
   ]
 
@@ -192,115 +192,118 @@ export default function HowItWorksSection() {
 
         {/* CTA Section - Redesigned */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+  initial={{ opacity: 0, y: 50 }}
+  animate={isInView ? { opacity: 1, y: 0 } : {}}
+  transition={{ duration: 0.8, delay: 0.8 }}
+  className="relative max-w-5xl mx-auto"
+>
+  <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-black via-gray-900 to-black p-[2px]">
+    <div className="relative bg-black rounded-3xl p-12 md:p-16 overflow-hidden">
+      {/* Animated Grid Background */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute inset-0"
+          style={{
+            backgroundImage: `linear-gradient(hsl(var(--chart-1)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--chart-3)) 1px, transparent 1px)`,
+            backgroundSize: '50px 50px',
+          }}
+        />
+      </div>
+
+      {/* Radial Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-radial from-[hsl(var(--chart-3))]/20 via-transparent to-transparent" />
+
+      <div className="relative z-10">
+        {/* Title */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="relative max-w-5xl mx-auto"
+          transition={{ delay: 1, duration: 0.6 }}
+          className="text-center mb-12"
         >
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-black via-gray-900 to-black p-[2px]">
-            <div className="relative bg-black rounded-3xl p-12 md:p-16 overflow-hidden">
-              {/* Animated Grid Background */}
-              <div className="absolute inset-0 opacity-20">
-                <div className="absolute inset-0" 
-                  style={{
-                    backgroundImage: `
-                      linear-gradient(hsl(var(--chart-3)) 1px, transparent 1px),
-                      linear-gradient(90deg, hsl(var(--chart-3)) 1px, transparent 1px)
-                    `,
-                    backgroundSize: '50px 50px',
-                  }}
-                />
-              </div>
-
-              {/* Radial Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-radial from-[hsl(var(--chart-3))]/20 via-transparent to-transparent" />
-
-              <div className="relative z-10">
-                {/* Title */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: 1, duration: 0.6 }}
-                  className="text-center mb-12"
-                >
-                  <h3 className="text-4xl md:text-6xl font-black text-white mb-4">
-                    Ready to Ride?
-                  </h3>
-                  <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
-                    Experience premium taxi service across Sri Lanka. Book now or explore our tour packages.
-                  </p>
-                </motion.div>
-
-                {/* Buttons */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: 1.2, duration: 0.6 }}
-                  className="flex flex-col sm:flex-row items-center justify-center gap-4"
-                >
-                  {/* Primary CTA */}
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => (window.location.href = "/booking")}
-                    className="group relative overflow-hidden border-2 border-white/30 text-white px-10 py-5 rounded-full font-bold text-lg backdrop-blur-sm hover:border-white/60 transition-colors"
-                  >
-                    <motion.div
-                      className="absolute inset-0 bg-white"
-                      initial={{ x: "-100%" }}
-                      whileHover={{ x: "100%" }}
-                      transition={{ duration: 0.5 }}
-                      style={{ opacity: 0.2 }}
-                    />
-                    <span className="relative flex items-center gap-2">
-                      <Phone className="w-5 h-5" />
-                      Book Your Ride Now
-                    </span>
-                    
-                  </motion.button>
-
-                  {/* Secondary CTA */}
-                  <motion.a
-                    href="https://mihithlankatours.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="group relative overflow-hidden border-2 border-white/30 text-white px-10 py-5 rounded-full font-bold text-lg backdrop-blur-sm hover:border-white/60 transition-colors"
-                  >
-                    <span className="flex items-center gap-2">
-                      Plan Your Tours
-                      <motion.div
-                        animate={{ x: [0, 5, 0] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                      >
-                        <ArrowRight className="w-5 h-5" />
-                      </motion.div>
-                    </span>
-                  </motion.a>
-                </motion.div>
-
-                {/* Bottom Note */}
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={isInView ? { opacity: 1 } : {}}
-                  transition={{ delay: 1.4, duration: 0.6 }}
-                  className="text-center text-sm text-gray-400 mt-8"
-                >
-                  Need multiple destinations or custom tours?{" "}
-                  <a
-                    href="https://mihithlankatours.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[hsl(var(--chart-3))] hover:underline font-semibold"
-                  >
-                    Visit Mihith Lanka Tours
-                  </a>
-                </motion.p>
-              </div>
-            </div>
-          </div>
+          <h3 className="text-4xl md:text-6xl font-black text-white mb-4">
+            Choose Your Journey
+          </h3>
+          <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
+            Quick taxi ride or planning multiple destinations? 
+            <span className="block mt-2 text-[hsl(var(--chart-3))] font-semibold">
+              We've got the perfect solution for you.
+            </span>
+          </p>
         </motion.div>
+
+        {/* Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 1.2, duration: 0.6 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+        >
+          {/* Primary CTA - Taxi Booking */}
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => (window.location.href = "/booking")}
+            className="group relative overflow-hidden border-2 border-white/30 text-white px-10 py-5 rounded-full font-bold text-lg backdrop-blur-sm hover:border-white/60 transition-colors"
+          >
+            <motion.div
+              className="absolute inset-0 bg-white"
+              initial={{ x: "-100%" }}
+              whileHover={{ x: "100%" }}
+              transition={{ duration: 0.5 }}
+              style={{ opacity: 0.2 }}
+            />
+            <span className="relative flex items-center gap-2">
+              <Phone className="w-5 h-5" />
+              Book a Taxi Ride
+            </span>
+          </motion.button>
+
+          {/* Secondary CTA - Tours */}
+          <motion.a
+            href="https://mihithlankatours.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="group relative overflow-hidden border-2 border-[hsl(var(--chart-3))]/50 text-white px-10 py-5 rounded-full font-bold text-lg backdrop-blur-sm hover:border-[hsl(var(--chart-3))] transition-colors"
+          >
+            <span className="flex items-center gap-2">
+              Explore Custom Tours
+              <motion.div
+                animate={{ x: [0, 5, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              >
+                <ArrowRight className="w-5 h-5" />
+              </motion.div>
+            </span>
+          </motion.a>
+        </motion.div>
+
+        {/* Bottom Note */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ delay: 1.4, duration: 0.6 }}
+          className="text-center text-sm text-gray-400 mt-8 max-w-3xl mx-auto"
+        >
+          <span className="block mb-1 text-gray-300 font-medium">
+            Planning multiple destinations or a customized tour across Sri Lanka?
+          </span>
+          Visit{" "}
+          <a
+            href="https://mihithlankatours.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[hsl(var(--chart-3))] hover:underline font-semibold"
+          >
+            Mihith Lanka Tours
+          </a>
+          {" "}to design your perfect itinerary with expert guidance.
+        </motion.p>
+      </div>
+    </div>
+  </div>
+</motion.div>
 
         {/* Trust Indicators */}
         <motion.div

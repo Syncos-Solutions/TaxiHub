@@ -1,3 +1,4 @@
+// lib/email-templates.tsx
 import {
   Body,
   Container,
@@ -7,9 +8,12 @@ import {
   Preview,
   Section,
   Text,
-  Row,
-  Column,
+  Hr,
 } from '@react-email/components'
+
+// ========================================
+// INTERFACES
+// ========================================
 
 interface BookingData {
   title: string
@@ -27,374 +31,610 @@ interface BookingData {
   specialRequests: string
 }
 
-// Admin Email Template
+interface ContactData {
+  name: string
+  email: string
+  phone: string
+  message: string
+  submittedAt: string
+}
+
+// ========================================
+// BOOKING EMAIL TEMPLATES
+// ========================================
+
+// Admin Booking Email Template
 export const AdminBookingEmail = ({ data }: { data: BookingData }) => (
   <Html>
     <Head />
     <Preview>New Booking: {data.pickup} → {data.destination}</Preview>
     <Body style={main}>
       <Container style={container}>
+        
         {/* Header */}
         <Section style={header}>
-          <Heading style={h1}>🚕 New Booking Request</Heading>
-          <Text style={headerText}>MihithTaxi Booking System</Text>
+          <Heading style={companyName}>MIHITH LANKA TAXI</Heading>
+          <Text style={headerSubtitle}>New Booking Request</Text>
         </Section>
-        
+
         {/* Content */}
         <Section style={content}>
+          
+          {/* Alert Box */}
+          <Section style={alertBox}>
+            <Text style={alertText}>
+              Action Required: Please contact the customer to confirm this booking.
+            </Text>
+          </Section>
+
           {/* Customer Information */}
-          <Section style={section}>
-            <Heading style={sectionTitle}>👤 Customer Information</Heading>
-            <Text style={infoRow}>
-              <strong style={label}>Name:</strong> {data.title} {data.firstName} {data.lastName}
-            </Text>
-            <Text style={infoRow}>
-              <strong style={label}>Email:</strong> {data.email}
-            </Text>
-            <Text style={infoRow}>
-              <strong style={label}>Phone:</strong> {data.phone}
-            </Text>
-            {data.whatsapp && (
-              <Text style={infoRow}>
-                <strong style={label}>WhatsApp:</strong> {data.whatsapp}
-              </Text>
-            )}
+          <Section style={dataSection}>
+            <Heading style={sectionHeading}>Customer Information</Heading>
+            <Hr style={divider} />
+            
+            <table style={table}>
+              <tr style={tableRow}>
+                <td style={tableLabel}>Name</td>
+                <td style={tableValue}>{data.title} {data.firstName} {data.lastName}</td>
+              </tr>
+              <tr style={tableRow}>
+                <td style={tableLabel}>Email</td>
+                <td style={tableValue}>{data.email}</td>
+              </tr>
+              <tr style={tableRow}>
+                <td style={tableLabel}>Phone</td>
+                <td style={tableValue}>{data.phone}</td>
+              </tr>
+              {data.whatsapp && (
+                <tr style={tableRow}>
+                  <td style={tableLabel}>WhatsApp</td>
+                  <td style={tableValue}>{data.whatsapp}</td>
+                </tr>
+              )}
+            </table>
           </Section>
 
           {/* Journey Details */}
-          <Section style={section}>
-            <Heading style={sectionTitle}>🗺️ Journey Details</Heading>
-            <Text style={infoRow}>
-              <strong style={label}>Pickup Location:</strong> {data.pickup}
-            </Text>
-            <Text style={infoRow}>
-              <strong style={label}>Destination:</strong> {data.destination}
-            </Text>
-            <Text style={infoRow}>
-              <strong style={label}>Date:</strong> {data.date}
-            </Text>
-            <Text style={infoRow}>
-              <strong style={label}>Time:</strong> {data.time}
-            </Text>
-          </Section>
-
-          {/* Vehicle Information */}
-          <Section style={section}>
-            <Heading style={sectionTitle}>🚗 Vehicle Information</Heading>
-            <Text style={infoRow}>
-              <strong style={label}>Number of Passengers:</strong> {data.passengers}
-            </Text>
-            <Text style={infoRow}>
-              <strong style={label}>Vehicle Type:</strong> {data.vehicleType}
-            </Text>
-          </Section>
-
-          {/* Special Requests */}
-          {data.specialRequests && (
-            <Section style={section}>
-              <Heading style={sectionTitle}>📝 Special Requests</Heading>
-              <Text style={infoRow}>{data.specialRequests}</Text>
-            </Section>
-          )}
-
-          {/* Action Required */}
-          <Section style={highlight}>
-            <Text style={{ margin: 0 }}>
-              <strong>⏰ Action Required:</strong> Please contact the customer as soon as possible to confirm the booking.
-            </Text>
-          </Section>
-        </Section>
-      </Container>
-    </Body>
-  </Html>
-)
-
-// Customer Confirmation Email
-export const CustomerConfirmationEmail = ({ data }: { data: BookingData }) => (
-  <Html>
-    <Head />
-    <Preview>Booking Confirmation - TaxiHub</Preview>
-    <Body style={main}>
-      <Container style={container}>
-        {/* Header */}
-        <Section style={customerHeader}>
-          <Heading style={logo}>🚕 TaxiHub</Heading>
-          <Heading style={h1}>Booking Confirmation</Heading>
-          <Text style={headerText}>Your ride is being processed!</Text>
-        </Section>
-
-        {/* Content */}
-        <Section style={content}>
-          {/* Success Badge */}
-          <Section style={{ textAlign: 'center' as const }}>
-            <Text style={successBadge}>✓ Booking Received</Text>
-          </Section>
-
-          <Heading style={h2}>Dear {data.title} {data.firstName} {data.lastName},</Heading>
-          
-          <Text style={paragraph}>
-            Thank you for choosing <strong style={{ color: '#ff9d00' }}>TaxiHub</strong>! 
-            We've received your booking request and our team is reviewing it now.
-          </Text>
-
-          {/* Highlight Box */}
-          <Section style={highlightBox}>
-            <Heading style={h3}>📞 We'll Contact You Soon</Heading>
-            <Text style={{ margin: 0 }}>
-              Our team will reach out to you shortly at <strong>{data.phone}</strong> to confirm your booking details.
-            </Text>
-          </Section>
-
-          {/* Booking Details */}
-          <Section style={infoBox}>
-            <Heading style={h3}>📋 Your Booking Details</Heading>
+          <Section style={dataSection}>
+            <Heading style={sectionHeading}>Journey Details</Heading>
+            <Hr style={divider} />
             
-            <Text style={detailRow}>
-              <strong>📍 Pickup:</strong> {data.pickup}
-            </Text>
-            <Text style={detailRow}>
-              <strong>🎯 Destination:</strong> {data.destination}
-            </Text>
-            <Text style={detailRow}>
-              <strong>📅 Date:</strong> {data.date}
-            </Text>
-            <Text style={detailRow}>
-              <strong>🕐 Time:</strong> {data.time}
-            </Text>
-            <Text style={detailRow}>
-              <strong>👥 Passengers:</strong> {data.passengers}
-            </Text>
-            <Text style={detailRow}>
-              <strong>🚗 Vehicle Type:</strong> {data.vehicleType}
-            </Text>
+            <table style={table}>
+              <tr style={tableRow}>
+                <td style={tableLabel}>Pickup</td>
+                <td style={tableValue}>{data.pickup}</td>
+              </tr>
+              <tr style={tableRow}>
+                <td style={tableLabel}>Destination</td>
+                <td style={tableValue}>{data.destination}</td>
+              </tr>
+              <tr style={tableRow}>
+                <td style={tableLabel}>Date</td>
+                <td style={tableValue}>{data.date}</td>
+              </tr>
+              <tr style={tableRow}>
+                <td style={tableLabel}>Time</td>
+                <td style={tableValue}>{data.time}</td>
+              </tr>
+            </table>
           </Section>
 
           {/* Special Requests */}
           {data.specialRequests && (
-            <Section style={specialRequestsBox}>
-              <Heading style={h4}>💬 Your Special Requests:</Heading>
-              <Text style={{ margin: 0 }}>{data.specialRequests}</Text>
+            <Section style={dataSection}>
+              <Heading style={sectionHeading}>Special Requests</Heading>
+              <Hr style={divider} />
+              <Text style={messageContent}>{data.specialRequests}</Text>
             </Section>
           )}
 
-          {/* What's Next */}
-          <Section>
-            <Heading style={h3}>🎯 What Happens Next?</Heading>
-            <Text style={listItem}>1. Our team reviews your booking details</Text>
-            <Text style={listItem}>2. We'll call you at <strong>{data.phone}</strong> to confirm</Text>
-            <Text style={listItem}>3. You'll receive final confirmation via email</Text>
-            <Text style={listItem}>4. Enjoy your comfortable ride with TaxiHub!</Text>
-          </Section>
-
-          {/* Contact Info */}
-          <Section style={contactBox}>
-            <Heading style={h4}>Need to make changes?</Heading>
-            <Text style={{ marginBottom: 10 }}>Contact our 24/7 support team</Text>
-            <Text style={{ fontSize: 18, color: '#ff9d00', fontWeight: 'bold', margin: 0 }}>
-              📞 +94 701234567 | ✉️ booking@taxihub.com
-            </Text>
-          </Section>
         </Section>
 
         {/* Footer */}
         <Section style={footer}>
-          <Text style={footerText}>🚕 TaxiHub - Your Trusted Ride Partner</Text>
-          <Text style={footerLinks}>
-            Website | Terms | Privacy | Contact
-          </Text>
-          <Text style={footerSmall}>
-            © 2024 TaxiHub. All rights reserved.<br/>
-            This is an automated message, please do not reply to this email.
+          <Text style={footerText}>
+            Mihith Lanka Taxi<br />
+            Colombo, Sri Lanka<br />
+            +94 77 659 9542
           </Text>
         </Section>
+
       </Container>
     </Body>
   </Html>
 )
 
-// Styles
+// Customer Booking Confirmation Email
+export const CustomerConfirmationEmail = ({ data }: { data: BookingData }) => (
+  <Html>
+    <Head />
+    <Preview>Booking Confirmation - Mihith Lanka Taxi</Preview>
+    <Body style={main}>
+      <Container style={container}>
+        
+        {/* Header */}
+        <Section style={header}>
+          <Heading style={companyName}>MIHITH LANKA TAXI</Heading>
+          <Text style={headerSubtitle}>Booking Confirmation</Text>
+        </Section>
+
+        {/* Content */}
+        <Section style={content}>
+          
+          {/* Greeting */}
+          <Text style={greeting}>
+            Dear {data.title} {data.firstName} {data.lastName},
+          </Text>
+
+          <Text style={bodyText}>
+            Thank you for choosing Mihith Lanka Taxi. We have received your booking request 
+            and our team will contact you as soon as possible to confirm the details.
+          </Text>
+
+          {/* Confirmation Box */}
+          <Section style={confirmationBox}>
+            <Text style={confirmationText}>
+              Booking Reference: #{Date.now().toString(36).toUpperCase()}
+            </Text>
+          </Section>
+
+          {/* Booking Summary */}
+          <Section style={dataSection}>
+            <Heading style={sectionHeading}>Booking Summary</Heading>
+            <Hr style={divider} />
+            
+            <table style={table}>
+              <tr style={tableRow}>
+                <td style={tableLabel}>From</td>
+                <td style={tableValue}>{data.pickup}</td>
+              </tr>
+              <tr style={tableRow}>
+                <td style={tableLabel}>To</td>
+                <td style={tableValue}>{data.destination}</td>
+              </tr>
+              <tr style={tableRow}>
+                <td style={tableLabel}>Date</td>
+                <td style={tableValue}>{data.date}</td>
+              </tr>
+              <tr style={tableRow}>
+                <td style={tableLabel}>Time</td>
+                <td style={tableValue}>{data.time}</td>
+              </tr>
+            </table>
+          </Section>
+
+          {/* Special Requests */}
+          {data.specialRequests && (
+            <Section style={dataSection}>
+              <Heading style={sectionHeading}>Your Special Requests</Heading>
+              <Hr style={divider} />
+              <Text style={messageContent}>{data.specialRequests}</Text>
+            </Section>
+          )}
+
+          {/* Next Steps */}
+          <Section style={dataSection}>
+            <Heading style={sectionHeading}>What Happens Next</Heading>
+            <Hr style={divider} />
+            <Text style={listText}>1. Our team will review your booking</Text>
+            <Text style={listText}>2. We will call you at {data.phone} to confirm</Text>
+            <Text style={listText}>3. You will receive final confirmation</Text>
+            <Text style={listText}>4. Enjoy your ride with us</Text>
+          </Section>
+
+          {/* Contact Info */}
+          <Section style={contactSection}>
+            <Text style={contactTitle}>Need to Make Changes?</Text>
+            <Text style={contactDetails}>
+              Contact us at +94 77 659 9542 or support@mihithlanka.com
+            </Text>
+          </Section>
+
+        </Section>
+
+        {/* Footer */}
+        <Section style={footer}>
+          <Text style={footerText}>
+            Mihith Lanka Taxi<br />
+            Colombo, Sri Lanka<br />
+            +94 77 659 9542 | support@mihithlanka.com
+          </Text>
+          <Text style={footerSmall}>
+            This is an automated confirmation. Please do not reply to this email.
+          </Text>
+        </Section>
+
+      </Container>
+    </Body>
+  </Html>
+)
+
+// ========================================
+// CONTACT FORM EMAIL TEMPLATES
+// ========================================
+
+// Admin Contact Email Template
+export const AdminContactEmail = ({ data }: { data: ContactData }) => (
+  <Html>
+    <Head />
+    <Preview>New Contact Message from {data.name}</Preview>
+    <Body style={main}>
+      <Container style={container}>
+        
+        {/* Header */}
+        <Section style={header}>
+          <Heading style={companyName}>MIHITH LANKA TAXI</Heading>
+          <Text style={headerSubtitle}>New Contact Message</Text>
+        </Section>
+
+        {/* Content */}
+        <Section style={content}>
+          
+          {/* Alert Box */}
+          <Section style={alertBox}>
+            <Text style={alertText}>
+              Action Required: Please respond to this inquiry.
+            </Text>
+          </Section>
+
+          {/* Contact Information */}
+          <Section style={dataSection}>
+            <Heading style={sectionHeading}>Contact Details</Heading>
+            <Hr style={divider} />
+            
+            <table style={table}>
+              <tr style={tableRow}>
+                <td style={tableLabel}>Name</td>
+                <td style={tableValue}>{data.name}</td>
+              </tr>
+              <tr style={tableRow}>
+                <td style={tableLabel}>Email</td>
+                <td style={tableValue}>
+                  <a href={`mailto:${data.email}`} style={link}>{data.email}</a>
+                </td>
+              </tr>
+              <tr style={tableRow}>
+                <td style={tableLabel}>Phone</td>
+                <td style={tableValue}>
+                  <a href={`tel:${data.phone}`} style={link}>{data.phone}</a>
+                </td>
+              </tr>
+              <tr style={tableRow}>
+                <td style={tableLabel}>Received</td>
+                <td style={tableValue}>{data.submittedAt}</td>
+              </tr>
+            </table>
+          </Section>
+
+          {/* Message */}
+          <Section style={dataSection}>
+            <Heading style={sectionHeading}>Message</Heading>
+            <Hr style={divider} />
+            <Text style={messageContent}>{data.message}</Text>
+          </Section>
+
+        </Section>
+
+        {/* Footer */}
+        <Section style={footer}>
+          <Text style={footerText}>
+            Mihith Lanka Taxi - Contact Form<br />
+            This is an automated notification from your website.
+          </Text>
+        </Section>
+
+      </Container>
+    </Body>
+  </Html>
+)
+
+// Customer Contact Auto-Reply Email Template
+export const CustomerContactReplyEmail = ({ data }: { data: ContactData }) => (
+  <Html>
+    <Head />
+    <Preview>Thank You for Contacting Mihith Lanka Taxi</Preview>
+    <Body style={main}>
+      <Container style={container}>
+        
+        {/* Header */}
+        <Section style={header}>
+          <Heading style={companyName}>MIHITH LANKA TAXI</Heading>
+          <Text style={headerSubtitle}>Message Received</Text>
+        </Section>
+
+        {/* Content */}
+        <Section style={content}>
+          
+          {/* Greeting */}
+          <Text style={greeting}>
+            Hello {data.name},
+          </Text>
+
+          <Text style={bodyText}>
+            Thank you for contacting Mihith Lanka Taxi. We have received your message 
+            and our team will get back to you soon.
+          </Text>
+
+          {/* Confirmation Box */}
+          <Section style={confirmationBox}>
+            <Text style={confirmationText}>
+              Message received on {data.submittedAt}
+            </Text>
+          </Section>
+
+          {/* Message Summary */}
+          <Section style={dataSection}>
+            <Heading style={sectionHeading}>Your Message</Heading>
+            <Hr style={divider} />
+            
+            <table style={table}>
+              <tr style={tableRow}>
+                <td style={tableLabel}>Email</td>
+                <td style={tableValue}>{data.email}</td>
+              </tr>
+              <tr style={tableRow}>
+                <td style={tableLabel}>Phone</td>
+                <td style={tableValue}>{data.phone}</td>
+              </tr>
+            </table>
+
+            <Section style={{ marginTop: 20 }}>
+              <Text style={messageContent}>{data.message}</Text>
+            </Section>
+          </Section>
+
+          {/* What's Next */}
+          <Section style={dataSection}>
+            <Heading style={sectionHeading}>What Happens Next</Heading>
+            <Hr style={divider} />
+            <Text style={listText}>1. Our team reviews your inquiry</Text>
+            <Text style={listText}>2. We will contact you at {data.phone}</Text>
+            <Text style={listText}>3. You will receive a personalized response</Text>
+          </Section>
+
+          {/* Urgent Contact */}
+          <Section style={contactSection}>
+            <Text style={contactTitle}>Need Immediate Assistance?</Text>
+            <Text style={contactDetails}>
+              Call us at +94 77 659 9542 (Available 24/7)
+            </Text>
+          </Section>
+
+          {/* Services */}
+          <Section style={servicesSection}>
+            <Heading style={sectionHeading}>Our Services</Heading>
+            <Hr style={divider} />
+            <Text style={serviceText}>Taxi Services - Airport Transfers - Custom Tours - Multi-day Tours</Text>
+          </Section>
+
+        </Section>
+
+        {/* Footer */}
+        <Section style={footer}>
+          <Text style={footerText}>
+            Mihith Lanka Taxi<br />
+            Your Trusted Travel Partner in Sri Lanka<br />
+            Colombo, Sri Lanka | +94 77 659 9542
+          </Text>
+          <Text style={footerSmall}>
+            This is an automated confirmation. Please do not reply to this email.
+          </Text>
+        </Section>
+
+      </Container>
+    </Body>
+  </Html>
+)
+
+// ========================================
+// MINIMAL PROFESSIONAL STYLES
+// ========================================
+
 const main = {
-  backgroundColor: '#f6f9fc',
-  fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif',
+  backgroundColor: '#f5f5f5',
+  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+  fontSize: '16px',
+  lineHeight: '1.6',
+  color: '#333333',
 }
 
 const container = {
   backgroundColor: '#ffffff',
   margin: '0 auto',
-  padding: '20px 0',
   maxWidth: '600px',
-}
-
-const header = {
-  background: 'linear-gradient(135deg, #ff9d00 0%, #ffb347 100%)',
-  padding: '30px',
-  textAlign: 'center' as const,
-  borderRadius: '10px 10px 0 0',
-}
-
-const customerHeader = {
-  background: 'linear-gradient(135deg, #ff9d00 0%, #ffb347 100%)',
-  padding: '40px 20px',
-  textAlign: 'center' as const,
-}
-
-const logo = {
-  fontSize: '32px',
-  fontWeight: 'bold',
-  color: '#ffffff',
-  margin: '0 0 10px 0',
-}
-
-const h1 = {
-  color: '#ffffff',
-  fontSize: '28px',
-  fontWeight: 'bold',
-  margin: '10px 0',
-}
-
-const h2 = {
-  color: '#333333',
-  fontSize: '20px',
-  marginTop: '30px',
-}
-
-const h3 = {
-  color: '#ff9d00',
-  fontSize: '18px',
-  margin: '0 0 10px 0',
-}
-
-const h4 = {
-  color: '#333333',
-  fontSize: '16px',
-  margin: '0 0 10px 0',
-}
-
-const headerText = {
-  color: '#ffffff',
-  margin: 0,
-  opacity: 0.9,
-}
-
-const content = {
-  padding: '30px',
-}
-
-const section = {
-  backgroundColor: '#ffffff',
-  padding: '20px',
-  marginBottom: '20px',
-  borderRadius: '8px',
   border: '1px solid #e0e0e0',
 }
 
-const sectionTitle = {
-  color: '#ff9d00',
-  fontSize: '18px',
-  fontWeight: 'bold',
-  marginBottom: '15px',
-  borderBottom: '2px solid #ff9d00',
-  paddingBottom: '10px',
+const header = {
+  backgroundColor: '#000000',
+  padding: '40px 30px',
+  textAlign: 'center' as const,
 }
 
-const infoRow = {
-  margin: '10px 0',
-  color: '#333333',
-}
-
-const label = {
-  fontWeight: 'bold',
-  color: '#555555',
-  width: '180px',
-  display: 'inline-block',
-}
-
-const highlight = {
-  backgroundColor: '#fff3e0',
-  padding: '15px',
-  borderLeft: '4px solid #ff9d00',
-  margin: '20px 0',
-}
-
-const paragraph = {
-  fontSize: '16px',
-  lineHeight: '1.8',
-  color: '#333333',
-}
-
-const successBadge = {
-  backgroundColor: '#4CAF50',
+const companyName = {
   color: '#ffffff',
-  display: 'inline-block',
-  padding: '10px 20px',
-  borderRadius: '25px',
-  fontWeight: 'bold',
-  margin: '20px 0',
+  fontSize: '24px',
+  fontWeight: '700',
+  margin: '0 0 8px 0',
+  letterSpacing: '2px',
 }
 
-const highlightBox = {
-  background: 'linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%)',
-  padding: '25px',
-  borderRadius: '10px',
-  margin: '25px 0',
+const headerSubtitle = {
+  color: '#ffffff',
+  fontSize: '14px',
+  fontWeight: '400',
+  margin: '0',
+  opacity: 0.9,
+  textTransform: 'uppercase' as const,
+  letterSpacing: '1px',
+}
+
+const content = {
+  padding: '40px 30px',
+}
+
+const greeting = {
+  fontSize: '16px',
+  fontWeight: '600',
+  color: '#000000',
+  margin: '0 0 20px 0',
+}
+
+const bodyText = {
+  fontSize: '15px',
+  lineHeight: '1.7',
+  color: '#333333',
+  margin: '0 0 25px 0',
+}
+
+const alertBox = {
+  backgroundColor: '#f8f8f8',
+  border: '2px solid #000000',
+  padding: '15px 20px',
+  margin: '0 0 30px 0',
+}
+
+const alertText = {
+  fontSize: '14px',
+  fontWeight: '600',
+  color: '#000000',
+  margin: '0',
   textAlign: 'center' as const,
 }
 
-const infoBox = {
-  backgroundColor: '#f8f9fa',
-  borderLeft: '4px solid #ff9d00',
-  padding: '20px',
-  margin: '20px 0',
-  borderRadius: '5px',
+const confirmationBox = {
+  backgroundColor: '#f8f8f8',
+  padding: '15px 20px',
+  margin: '0 0 30px 0',
+  textAlign: 'center' as const,
 }
 
-const detailRow = {
-  padding: '12px 0',
-  borderBottom: '1px solid #eeeeee',
-  margin: 0,
+const confirmationText = {
+  fontSize: '13px',
+  fontWeight: '600',
+  color: '#000000',
+  margin: '0',
+  letterSpacing: '0.5px',
 }
 
-const specialRequestsBox = {
-  backgroundColor: '#f8f9fa',
-  padding: '20px',
-  borderRadius: '8px',
-  margin: '20px 0',
+const dataSection = {
+  marginBottom: '30px',
 }
 
-const listItem = {
-  lineHeight: '2',
+const sectionHeading = {
+  fontSize: '16px',
+  fontWeight: '700',
+  color: '#000000',
+  margin: '0 0 12px 0',
+  textTransform: 'uppercase' as const,
+  letterSpacing: '1px',
+}
+
+const divider = {
+  borderColor: '#000000',
+  borderWidth: '1px',
+  margin: '0 0 20px 0',
+}
+
+const table = {
+  width: '100%',
+  borderCollapse: 'collapse' as const,
+}
+
+const tableRow = {
+  borderBottom: '1px solid #e0e0e0',
+}
+
+const tableLabel = {
+  fontSize: '14px',
+  fontWeight: '600',
   color: '#666666',
-  margin: '5px 0',
+  padding: '12px 0',
+  width: '140px',
+  verticalAlign: 'top' as const,
 }
 
-const contactBox = {
-  background: 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)',
-  padding: '25px',
-  borderRadius: '10px',
+const tableValue = {
+  fontSize: '14px',
+  color: '#000000',
+  padding: '12px 0',
+  verticalAlign: 'top' as const,
+}
+
+const messageContent = {
+  fontSize: '14px',
+  lineHeight: '1.7',
+  color: '#333333',
+  margin: '0',
+  padding: '15px',
+  backgroundColor: '#f8f8f8',
+  border: '1px solid #e0e0e0',
+  whiteSpace: 'pre-wrap' as const,
+}
+
+const listText = {
+  fontSize: '14px',
+  lineHeight: '2',
+  color: '#333333',
+  margin: '0 0 8px 0',
+}
+
+const contactSection = {
+  backgroundColor: '#f8f8f8',
+  padding: '20px',
+  margin: '30px 0 0 0',
   textAlign: 'center' as const,
-  margin: '20px 0',
+  border: '1px solid #e0e0e0',
+}
+
+const contactTitle = {
+  fontSize: '15px',
+  fontWeight: '700',
+  color: '#000000',
+  margin: '0 0 10px 0',
+}
+
+const contactDetails = {
+  fontSize: '14px',
+  color: '#333333',
+  margin: '0',
+}
+
+const servicesSection = {
+  marginTop: '30px',
+  paddingTop: '30px',
+  borderTop: '1px solid #e0e0e0',
+}
+
+const serviceText = {
+  fontSize: '13px',
+  color: '#666666',
+  margin: '0',
+  textAlign: 'center' as const,
+}
+
+const link = {
+  color: '#000000',
+  textDecoration: 'underline',
 }
 
 const footer = {
-  backgroundColor: '#f8f9fa',
+  backgroundColor: '#f8f8f8',
   padding: '30px',
   textAlign: 'center' as const,
+  borderTop: '1px solid #e0e0e0',
 }
 
 const footerText = {
-  fontWeight: 'bold',
-  color: '#333333',
+  fontSize: '13px',
+  lineHeight: '1.8',
+  color: '#666666',
   margin: '0 0 15px 0',
 }
 
-const footerLinks = {
-  margin: '15px 0',
-  color: '#666666',
-  fontSize: '14px',
-}
-
 const footerSmall = {
-  margin: '15px 0 0 0',
-  fontSize: '12px',
-  color: '#666666',
+  fontSize: '11px',
+  color: '#999999',
+  margin: '0',
+  fontStyle: 'italic' as const,
 }

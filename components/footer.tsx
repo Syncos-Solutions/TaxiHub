@@ -31,7 +31,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/booking" className="hover:text-accent transition-colors duration-300">
+                <Link href="/#Booking" className="hover:text-accent transition-colors duration-300">
                   Book Now
                 </Link>
               </li>
@@ -81,7 +81,7 @@ export default function Footer() {
             <div className="space-y-3 mb-4">
               <div className="flex items-center gap-2 text-primary-foreground/70 hover:text-accent transition-colors">
                 <Phone size={18} />
-                <span>+94 77 728 8286</span>
+                <span>+94 77 659 9542</span>
               </div>
               <div className="flex items-center gap-2 text-primary-foreground/70 hover:text-accent transition-colors">
                 <Mail size={18} />
